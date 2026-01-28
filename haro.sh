@@ -26,8 +26,9 @@ fi
 
 echo "Fetching unassigned open issues from GitHub..."
 
-# Fetch open issues that are unassigned
-ISSUES_JSON=$(gh issue list --state open --assignee none --json number,title,body,labels,url --limit 100)
+# Fetch all open issues and filter for unassigned ones using jq
+ALL_ISSUES=$(gh issue list --state open --json number,title,body,labels,url,assignees --limit 100)
+ISSUES_JSON=$(echo "$ALL_ISSUES" | jq '[.[] | select(.assignees | length == 0)]')
 
 if [ "$ISSUES_JSON" = "[]" ] || [ -z "$ISSUES_JSON" ]; then
   echo "No unassigned open issues found in the current repository."
@@ -124,7 +125,8 @@ for i in $(seq 1 "$ITERATIONS"); do
   fi
 
   # Refresh unassigned issues list for next iteration
-  ISSUES_JSON=$(gh issue list --state open --assignee none --json number,title,body,labels,url --limit 100)
+  ALL_ISSUES=$(gh issue list --state open --json number,title,body,labels,url,assignees --limit 100)
+  ISSUES_JSON=$(echo "$ALL_ISSUES" | jq '[.[] | select(.assignees | length == 0)]')
 
   if [ "$ISSUES_JSON" = "[]" ] || [ -z "$ISSUES_JSON" ]; then
     echo "No more unassigned issues!"
