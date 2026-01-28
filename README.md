@@ -24,7 +24,7 @@ Before installing, ensure you have:
 
 ## Installation
 
-Install the script to your local bin directory:
+Install the Haro script to your local bin directory:
 
 ```bash
 curl -o ~/.local/bin/haro https://raw.githubusercontent.com/kivlor/haro-ai/main/haro.sh
@@ -79,6 +79,40 @@ Process up to 20 issues:
 ```bash
 haro 20
 ```
+
+## Optional: Codex Skill for Issue Creation
+
+For a streamlined workflow, install the included `$create-haro-issue` Codex skill to create well-defined issues that Haro can work on.
+
+### Install the Skill
+
+```bash
+# Clone to your Codex user skills directory
+mkdir -p ~/.codex/skills
+git clone https://github.com/kivlor/haro-ai.git ~/.codex/skills/haro-ai
+
+# Or install at repo-level (from your project root)
+mkdir -p .codex/skills
+git clone https://github.com/kivlor/haro-ai.git .codex/skills/haro-ai
+```
+
+After installation, restart Codex to pick up the new skill.
+
+### Use the Skill
+
+Invoke the skill in Codex:
+```bash
+$create-haro-issue
+```
+
+The skill will interactively guide you through:
+1. Defining a clear issue title
+2. Writing a detailed description
+3. Creating testable acceptance criteria (one at a time)
+4. Adding labels and milestones (optional)
+5. Creating the GitHub issue with structured formatting
+
+This creates issues that are perfectly formatted for Haro to process automatically.
 
 ## How It Works
 
