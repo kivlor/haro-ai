@@ -1,10 +1,10 @@
-# Haro AI
+# Haro
 
-AI-powered automation loop scripts for GitHub issue management.
+AI-powered automation loop script for GitHub issue completion.
 
 ## Overview
 
-Haro AI automatically works through your GitHub issues by:
+Haro automatically works through your GitHub issues by:
 - Fetching unassigned open issues
 - Assigning itself to an issue
 - Implementing the solution
@@ -27,7 +27,7 @@ Before installing, ensure you have:
 Install the Haro script to your local bin directory:
 
 ```bash
-curl -o ~/.local/bin/haro https://raw.githubusercontent.com/kivlor/haro-ai/main/haro.sh
+curl -o ~/.local/bin/haro https://raw.githubusercontent.com/kivlor/haro/main/haro.sh
 chmod +x ~/.local/bin/haro
 ```
 
@@ -155,7 +155,3 @@ Example patterns:
 - All work is done in **feature branches** for safe review
 - The agent will **not** work on assigned issues (respects human ownership)
 - Each run is independent - you can safely stop and restart
-
-## License
-
-MIT
