@@ -116,20 +116,21 @@ This creates issues that are perfectly formatted for Haro to process automatical
 
 ## How It Works
 
-1. **Fetches unassigned issues** from the current repository
-2. **Selects lowest-numbered issue** to maintain priority
-3. **Assigns itself** to the issue (`gh issue edit [number] --add-assignee @me`)
-4. **Implements the solution** using AI
-5. **Creates a feature branch** (e.g., `issue-123-description`)
-6. **Runs tests/checks** to verify the solution
-7. **Commits changes** with format: `[feat|fix]: [Issue Title] (#123)`
-8. **Creates a pull request** that references the issue
-9. **Repeats** for the next unassigned issue
+1. **Fetches unassigned issues** from the current repository (up to 100)
+2. **Selects the first unassigned issue** from the list
+3. **Sends a prompt to Codex** with the issue details and workflow instructions
+4. **Codex reads `AGENTS.md`** (if it exists) for codebase patterns
+5. **Codex assigns itself** to the issue (`gh issue edit [number] --add-assignee @me`)
+6. **Codex creates a feature branch** (e.g., `issue-123-brief-description`)
+7. **Codex implements the solution** and runs relevant checks/tests/lint
+8. **Codex updates `AGENTS.md`** with any reusable patterns discovered
+9. **Codex commits changes** with format: `[feat|fix]: [Issue Title] (#123)`
+10. **Codex pushes and creates a pull request** that closes the issue on merge
+11. **Repeats** for the next unassigned issue
 
 The script stops when:
-- All unassigned issues are processed
-- Maximum iterations are reached
 - No unassigned issues remain
+- Maximum iterations are reached
 
 ## Codebase Patterns
 
